@@ -1,8 +1,8 @@
 # Collar AI — Landing Page
 
-Landing page for [Collar AI](https://github.com/Sonra0/Collar_AI), an AI-powered Chrome extension that coaches your body language in real time during Google Meet calls.
+Landing page for [Collar AI](https://github.com/Sonra0/Collar_AI), an AI-powered Chrome extension that coaches your body language in real time during video calls.
 
-**Live site:** [https://sonra0.github.io/collar-ai-website/](https://sonra0.github.io/collar-ai-website/)
+**Live site:** [https://collarai.online/](https://collarai.online/)
 
 ## What is Collar AI?
 
