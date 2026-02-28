@@ -399,11 +399,30 @@
       box-shadow: 0 0 40px rgba(0, 240, 255, 0.08);
     }
 
-    .video-container::before {
-      content: '';
+    .video-container video {
       position: absolute;
       inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: var(--radius);
+    }
+
+    .video-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+      transition: opacity 0.4s;
       background: radial-gradient(ellipse at center, rgba(0, 240, 255, 0.04) 0%, transparent 70%);
+    }
+
+    .video-container.playing .video-overlay {
+      opacity: 0;
+      pointer-events: none;
     }
 
     .play-button {
@@ -1050,10 +1069,13 @@
       <div class="hero-visual reveal reveal-delay-2">
         <div class="video-container" id="demo-video">
           <div class="video-glow"></div>
-          <div class="play-button">
-            <svg viewBox="0 0 24 24"><polygon points="8,5 19,12 8,19" /></svg>
+          <video src="demo.mp4" preload="metadata" playsinline></video>
+          <div class="video-overlay">
+            <div class="play-button">
+              <svg viewBox="0 0 24 24"><polygon points="8,5 19,12 8,19" /></svg>
+            </div>
+            <span class="video-label">Watch Demo</span>
           </div>
-          <span class="video-label">Watch Demo</span>
         </div>
       </div>
     </div>
@@ -1404,6 +1426,22 @@
   </footer>
 
   <script>
+    /* ─── Demo Video ─── */
+    const videoContainer = document.getElementById('demo-video');
+    const video = videoContainer.querySelector('video');
+    videoContainer.addEventListener('click', () => {
+      if (video.paused) {
+        video.play();
+        videoContainer.classList.add('playing');
+      } else {
+        video.pause();
+        videoContainer.classList.remove('playing');
+      }
+    });
+    video.addEventListener('ended', () => {
+      videoContainer.classList.remove('playing');
+    });
+
     /* ─── Scroll Reveal ─── */
     const reveals = document.querySelectorAll('.reveal');
     const observer = new IntersectionObserver((entries) => {
